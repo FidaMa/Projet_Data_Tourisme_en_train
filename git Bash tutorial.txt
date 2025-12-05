@@ -1,6 +1,7 @@
 https://@github.com/FidaMa/Projet_Data_Tourisme_en_train.git
 
 cd  ~/Desktop/projet_ADAD/Projet_Data_Tourisme_en_train
+
 git status
 git add new file.txt (ALT: git add .) ---> adds every new file
 git commit -m "message"
