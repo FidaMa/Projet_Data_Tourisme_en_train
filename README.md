@@ -50,8 +50,6 @@ Projet_Data_Tourisme_en_train/
 | `paca_monuments.html` | Carte interactive des monuments culturels PACA (Folium) |
 | `paca_monuments_avec_gares.html` | Carte combinée monuments + gares PACA avec plots |
 
-> 🔜 Ces cartes seront intégrées dans la **Page 2 du site web** (Cartes PACA)
-
 ---
 
 ## 📁 Partie 2 — Datasets
@@ -102,11 +100,13 @@ npm run dev
 
 ## 🌿 Impact environnemental
 
-Le train émet **126x moins de CO₂** que la voiture pour un même trajet en PACA.
+Le train émet **126x moins de CO₂** que la voiture — ce ratio est constant car basé sur les facteurs fixes ADEME 2024 :
 
-| Transport | CO₂ / 100 km |
-|-----------|-------------|
-| 🚆 Train | 173 g |
-| 🚗 Voiture | 21 800 g |
+| Transport | Facteur CO₂ (par km) |
+|-----------|---------------------|
+| 🚆 Train | 1,73 g/km |
+| 🚗 Voiture | 218 g/km |
+
+> Le site calcule dynamiquement la quantité exacte de CO₂ économisée pour chaque trajet selon sa distance réelle.
 
 *Source : Base Carbone ADEME 2024*
