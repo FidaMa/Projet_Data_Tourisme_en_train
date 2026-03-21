@@ -1,0 +1,39 @@
+/* Reset global */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+
+/* Marqueurs Leaflet personnalisés */
+.station-marker {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.station-marker.depart  { filter: drop-shadow(0 0 6px #2d9e6b); }
+.station-marker.arrivee { filter: drop-shadow(0 0 6px #e74c3c); }
+
+.poi-marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.poi-marker span {
+  transform: rotate(45deg);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.popup-poi { min-width: 180px; font-size: 0.88rem; }
+.popup-poi b { display: block; font-weight: 700; margin-bottom: 4px; color: #1a3a2a; }
+.popup-dist {
+  display: inline-block; font-size: 0.78rem; color: #6c757d;
+  background: #f8f9fa; padding: 1px 6px; border-radius: 4px; margin-bottom: 6px;
+}
+.popup-poi p { margin: 4px 0 0; color: #495057; line-height: 1.4; }
