@@ -1,0 +1,128 @@
+.poi-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 1.6rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  border: 1px solid #e9ecef;
+}
+
+.poi-panel h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a3a2a;
+  margin-bottom: 1rem;
+}
+
+.poi-count {
+  font-weight: 400;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.filtres {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.filtre-btn {
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid #dee2e6;
+  background: white;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #495057;
+  transition: all 0.15s;
+}
+
+.filtre-btn:hover {
+  border-color: #2d6a4f;
+  color: #2d6a4f;
+}
+
+.filtre-btn.actif {
+  background: #2d6a4f;
+  border-color: #2d6a4f;
+  color: white;
+  font-weight: 600;
+}
+
+.poi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.poi-list::-webkit-scrollbar { width: 4px; }
+.poi-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 2px; }
+.poi-list::-webkit-scrollbar-thumb { background: #adb5bd; border-radius: 2px; }
+
+.poi-item {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  border-left: 4px solid #dee2e6;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.poi-item:hover {
+  background: #f8f9fa;
+  transform: translateX(2px);
+}
+
+.poi-item.selected {
+  background: #f0f7f4;
+  border-color: #2d9e6b;
+  border-left-width: 4px;
+}
+
+.poi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.poi-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.poi-nom {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a3a2a;
+  flex: 1;
+  min-width: 0;
+}
+
+.poi-dist {
+  font-size: 0.78rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.poi-desc {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin: 0.4rem 0 0;
+  line-height: 1.4;
+}
+
+.poi-more {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6c757d;
+  padding: 0.5rem;
+  font-style: italic;
+}

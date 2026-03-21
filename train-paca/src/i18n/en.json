@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "accueil": "Home",
+    "carte": "PACA Map",
+    "trajets": "Journeys"
+  },
+  "home": {
+    "titre": "Travel by Train in PACA",
+    "soustitre": "Discover the treasures of Provence-Alpes-Côte d'Azur differently",
+    "cta": "Find a journey",
+    "stat1": "stations in PACA",
+    "stat2": "less CO₂ than by car",
+    "stat3": "tourist attractions",
+    "section_pourquoi": "Why travel by train?",
+    "arg1_titre": "Lower carbon footprint",
+    "arg1_texte": "A train journey emits up to 20 times less CO₂ than by car.",
+    "arg2_titre": "Unique destinations",
+    "arg2_texte": "Access charming small towns that are hard to reach otherwise.",
+    "arg3_titre": "Comfort & relaxation",
+    "arg3_texte": "Enjoy the Provençal landscape without the stress of driving."
+  },
+  "trajets": {
+    "titre": "Plan a journey",
+    "depart": "Departure station",
+    "arrivee": "Arrival station",
+    "date": "Travel date",
+    "chercher": "Search",
+    "distance": "Distance",
+    "duree": "Estimated duration",
+    "nb_trains": "trains available",
+    "premier": "First",
+    "dernier": "Last",
+    "co2_titre": "Carbon footprint",
+    "co2_train": "Train",
+    "co2_voiture": "Car",
+    "co2_avion": "Plane",
+    "poi_titre": "Things to discover on arrival",
+    "filtre_tous": "All",
+    "filtre_monument": "Monuments",
+    "filtre_restaurant": "Restaurants",
+    "filtre_hotel": "Hotels",
+    "distance_gare": "from station",
+    "chargement": "Loading...",
+    "erreur_api": "Unable to fetch schedules. Check your connection.",
+    "aucun_trajet": "No direct train found for this date.",
+    "selectionnez": "Select a departure and arrival station"
+  },
+  "carte": {
+    "titre": "PACA Tourist Map"
+  }
+}
