@@ -8,7 +8,7 @@
 
 ## 👥 Équipe
 
-Projet réalisé par **Fida Mars**, **Andrea Grasso** et **Leila El Mabrouk**
+Projet réalisé par **Fida Mars**, **Andrea Grasso**, **Asia Redaelli** et **Leila El Mabrouk**
 
 ---
 
