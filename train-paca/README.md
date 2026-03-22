@@ -120,12 +120,14 @@ npm run build
 
 ## 🌿 Impact environnemental
 
-Le train émet en moyenne **126x moins de CO₂** que la voiture pour un même trajet en PACA.
+Le train émet **126x moins de CO₂** que la voiture — ce ratio est constant car basé sur les facteurs fixes ADEME 2024 :
 
-| Moyen de transport | CO₂ pour 100 km |
-|-------------------|-----------------|
-| 🚆 Train | 173 g |
-| 🚗 Voiture | 21 800 g |
+| Transport | Facteur CO₂ (par km) |
+|-----------|---------------------|
+| 🚆 Train | 1,73 g/km |
+| 🚗 Voiture | 218 g/km |
+
+> Le site calcule dynamiquement la quantité exacte de CO₂ économisée pour chaque trajet selon sa distance réelle.
 
 *Source : Base Carbone ADEME 2024*
 
@@ -133,5 +135,4 @@ Le train émet en moyenne **126x moins de CO₂** que la voiture pour un même t
 
 ## 👥 Équipe
 
-Projet réalisé par **Fida Mars**, **Andrea Grasso** et **Leila El Mabrouk**  
-dans le cadre de l'Open Data University Saison 4 — Fondation SNCF.
+Projet réalisé par **Fida Mars**, **Andrea Grasso**, **Asia Redaelli** et **Leila El Mabrouk** dans le cadre de l'Open Data University Saison 4 — Fondation SNCF.
