@@ -25,13 +25,20 @@ export function co2Comparaison(distanceKm) {
   };
 }
 
-export function getPOIProches(poiList, lat, lng, rayonKm = 10) {
+export function getPOIProches(poiList, lat, lng, commune = null, rayonKm = 15) {
   return poiList
     .map((poi) => ({
       ...poi,
       distance: haversine(lat, lng, poi.lat, poi.lng),
     }))
-    .filter((poi) => poi.distance <= rayonKm)
+    .filter((poi) => {
+      // Filtrer par commune exacte si fournie
+      if (commune) {
+        return poi.commune_lower === commune.toLowerCase().trim();
+      }
+      // Sinon rayon 15km (fallback)
+      return poi.distance <= rayonKm;
+    })
     .sort((a, b) => a.distance - b.distance);
 }
 

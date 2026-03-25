@@ -22,15 +22,67 @@ const DEPT_NOMS = {
 const grandes = gares.filter((g) => g.grande);
 const petites  = gares.filter((g) => !g.grande && DEPT_ORDER.includes(g.dept));
 
-async function fetchJourneys(fromUic, toUic, date) {
-  const dt = date.replace(/-/g, "") + "T060000";
-  const url = `https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area:SNCF:${fromUic}&to=stop_area:SNCF:${toUic}&datetime=${dt}&count=15`;
+async function fetchJourneysPage(fromUic, toUic, datetime) {
+  const url = `https://api.sncf.com/v1/coverage/sncf/journeys?from=stop_area:SNCF:${fromUic}&to=stop_area:SNCF:${toUic}&datetime=${datetime}&count=15&forbidden_uris[]=physical_mode:Bus`;
   const res = await fetch(url, {
     headers: { Authorization: "Basic " + btoa(API_KEY + ":") },
   });
   if (!res.ok) throw new Error(`API ${res.status}`);
   const data = await res.json();
   return data.journeys || [];
+}
+
+// Extraire l'heure de départ réelle d'un journey (première section public_transport)
+function getDepartureTime(journey) {
+  return journey.sections?.find(s => s.type === "public_transport")?.departure_date_time || null;
+}
+
+async function fetchJourneys(fromUic, toUic, date) {
+  const dateBase = date.replace(/-/g, "");
+  const allJourneys = [];
+  const seenDeps = new Set(); // Pour dédoublonner par heure exacte
+  let currentDt = dateBase + "T000000"; // 00h00 — l'API trouvera le premier train
+  const limitDt  = dateBase + "T235900"; // Finir à 23h59
+  const maxAppels = 12;
+  let appels = 0;
+
+  while (currentDt <= limitDt && appels < maxAppels) {
+    const journeys = await fetchJourneysPage(fromUic, toUic, currentDt);
+    if (!journeys.length) break;
+
+    let lastDepStr = null;
+
+    for (const j of journeys) {
+      const dep = getDepartureTime(j);
+      if (!dep) continue;
+
+      // Garder seulement les trains de la date choisie
+      if (!dep.startsWith(dateBase)) continue;
+
+      // Dédoublonner par heure de départ exacte
+      if (!seenDeps.has(dep)) {
+        seenDeps.add(dep);
+        allJourneys.push(j);
+      }
+      lastDepStr = dep;
+    }
+
+    if (!lastDepStr) break;
+
+    // Prochain appel : dernier départ + 1 minute
+    const h = parseInt(lastDepStr.slice(9, 11));
+    const m = parseInt(lastDepStr.slice(11, 13));
+    const totalMin = h * 60 + m + 1;
+    const newH = Math.floor(totalMin / 60);
+    const newM = totalMin % 60;
+
+    if (newH >= 24) break;
+
+    currentDt = `${dateBase}T${String(newH).padStart(2,'0')}${String(newM).padStart(2,'0')}00`;
+    appels++;
+  }
+
+  return allJourneys;
 }
 
 function parseJourneys(journeys) {
@@ -44,6 +96,13 @@ function parseJourneys(journeys) {
     j.sections?.filter(s => s.type === "public_transport")
       .map(s => s.display_informations?.commercial_mode || "") || []
   ))].filter(Boolean);
+  // Distance réelle depuis l'API (en mètres → km)
+  const distancesAPI = journeys
+    .map(j => j.distances?.train || j.distances?.total || 0)
+    .filter(d => d > 0);
+  const distanceKm = distancesAPI.length > 0
+    ? Math.round(distancesAPI[0] / 1000)
+    : null;
   return {
     nb: journeys.length,
     dureeMin: Math.round(Math.min(...durations) / 60),
@@ -51,6 +110,8 @@ function parseJourneys(journeys) {
     premier: fmt(deps[0]),
     dernier: fmt(deps[deps.length - 1]),
     type: types[0] || "Train",
+    tousDeparts: deps.map(fmt),
+    distanceKm,  // Distance réelle ferroviaire depuis l'API
   };
 }
 
@@ -104,13 +165,16 @@ export default function Trajets() {
   const [trainInfo,   setTrainInfo]   = useState(null);
   const [trainErreur, setTrainErreur] = useState(false);
   const [monumentsProches, setMonumentsProches] = useState([]);
+  const [distanceAPI, setDistanceAPI] = useState(null);
   const [selectedMon, setSelectedMon] = useState(null);
 
   const gareDepart  = gares.find(g => g.uic === departId);
   const gareArrivee = gares.find(g => g.uic === arriveeId);
-  const distance    = gareDepart && gareArrivee
+  const distanceGPS = gareDepart && gareArrivee
     ? haversine(gareDepart.lat, gareDepart.lng, gareArrivee.lat, gareArrivee.lng)
     : null;
+  // Priorité à la distance API (réelle), sinon GPS (approximation)
+  const distance = distanceAPI || distanceGPS;
   const co2 = distance ? co2Comparaison(distance) : null;
   const horairesArrivee = gareArrivee ? getHorairesGare(gareArrivee, date) : null;
 
@@ -144,11 +208,18 @@ export default function Trajets() {
     setTrainInfo(null); setTrainErreur(false); setSelectedMon(null);
 
     if (gareArrivee) {
-      setMonumentsProches(getPOIProches(monuments, gareArrivee.lat, gareArrivee.lng, 15).slice(0, 30));
+      // Filtrer par commune exacte de la gare d'arrivée
+      const communeArrivee = gareArrivee.ville_groupe || gareArrivee.commune;
+      setMonumentsProches(getPOIProches(monuments, gareArrivee.lat, gareArrivee.lng, communeArrivee, 15).slice(0, 30));
     }
     try {
       const journeys = await fetchJourneys(departId, arriveeId, date);
-      setTrainInfo(parseJourneys(journeys));
+      const info = parseJourneys(journeys);
+      setTrainInfo(info);
+      // Utiliser distance API si disponible, sinon garder haversine
+      if (info?.distanceKm) {
+        setDistanceAPI(info.distanceKm);
+      }
     } catch (e) {
       console.error(e); setTrainErreur(true);
     } finally {
@@ -165,7 +236,7 @@ export default function Trajets() {
           <h1>Explorer la <span>Provence</span> en train</h1>
           <p>Horaires SNCF temps reel, empreinte carbone ADEME 2024 et patrimoine culturel.</p>
           <div className="source-badge">
-            <span className="dot green" /> SNCF Open Data · DATAtourisme · ADEME 2024
+            <span className="dot green" /> SNCF Open Data · Basilic · ADEME 2024
           </div>
         </div>
 
@@ -289,7 +360,7 @@ export default function Trajets() {
             <div className="result-stats">
               <div className="result-stat">
                 <span className="stat-val">{Math.round(distance)} km</span>
-                <span className="stat-lbl">distance GPS</span>
+                <span className="stat-lbl">{distanceAPI ? "distance réelle" : "distance GPS"}</span>
               </div>
               {trainInfo && trainInfo.nb > 0 && (
                 <>
@@ -318,7 +389,9 @@ export default function Trajets() {
                     <div key={i}
                       className={`monument-item ${selectedMon === i ? "selected" : ""}`}
                       onClick={() => setSelectedMon(selectedMon === i ? null : i)}>
-                      <div className="monument-nom">🏛️ {m.nom}</div>
+                      <div className="monument-nom">
+                    🏛️ {m.nom}
+                  </div>
                       <div className="monument-info">{m.distance.toFixed(1)} km · {m.commune || ""}</div>
                       {selectedMon === i && m.description && (
                         <p className="monument-desc">{m.description.slice(0, 180)}…</p>

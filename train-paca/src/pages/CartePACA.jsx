@@ -3,32 +3,22 @@ import "./CartePACA.css";
 
 const CARTES = [
   {
-    id: "monuments",
-    titre: "Monuments & sites culturels",
-    description: "Monuments nationaux, musées et sites classés accessibles depuis les gares PACA.",
+    id: "culture_gares",
+    titre: "Lieux culturels & gares PACA",
+    description: "Carte combinée : 935 lieux culturels Basilic (monuments, musées, théâtres, cinémas) et le réseau de gares ferroviaires PACA — filtrés par communes desservies par le réseau SNCF.",
     icon: "🏛️",
-    fichier: null, // Remplacez par : "/cartes/monuments.html"
+    fichier: "/cartes/paca_lieux_culturels_avec_gares.html",
+    source: "Basilic · data.gouv.fr",
+    nb: "935 lieux culturels · 135 gares",
   },
   {
     id: "gares",
     titre: "Réseau ferroviaire PACA",
-    description: "Cartographie des gares et lignes ferroviaires de la région avec densité de trafic.",
+    description: "Cartographie des gares et lignes ferroviaires de la région avec tracé des lignes.",
     icon: "🚉",
-    fichier: null, // Remplacez par : "/cartes/gares.html"
-  },
-  {
-    id: "isochrone",
-    titre: "Zones isochrones depuis Marseille",
-    description: "Destinations accessibles en moins de 1h, 2h et 3h en train depuis Marseille.",
-    icon: "⏱️",
-    fichier: null, // Remplacez par : "/cartes/isochrone.html"
-  },
-  {
-    id: "tourisme",
-    titre: "Densité touristique par commune",
-    description: "Carte de chaleur des points d'intérêt touristiques par commune en PACA.",
-    icon: "📍",
-    fichier: null, // Remplacez par : "/cartes/tourisme.html"
+    fichier: "/cartes/carte_gares_lignes_couleurs_foncees.html",
+    source: "SNCF Open Data",
+    nb: "135 gares · 6 départements",
   },
 ];
 
@@ -55,6 +45,7 @@ export default function CartePACA() {
               <div>
                 <div className="carte-tab-titre">{carte.titre}</div>
                 <div className="carte-tab-desc">{carte.description}</div>
+                {carte.nb && <div className="carte-tab-badge">{carte.nb}</div>}
               </div>
             </button>
           ))}
@@ -94,12 +85,12 @@ export default function CartePACA() {
         <h2>La région en chiffres</h2>
         <div className="region-grid">
           {[
-            { dept: "Bouches-du-Rhône (13)", gares: 18, poi: 5200, emoji: "🌅" },
-            { dept: "Var (83)", gares: 22, poi: 4800, emoji: "⚓" },
-            { dept: "Vaucluse (84)", gares: 12, poi: 2900, emoji: "🍇" },
-            { dept: "Alpes-de-Haute-Provence (04)", gares: 8, poi: 1500, emoji: "🏔️" },
-            { dept: "Hautes-Alpes (05)", gares: 5, poi: 1300, emoji: "🎿" },
-            { dept: "Alpes-Maritimes (06)", gares: 14, poi: 5600, emoji: "🌊" },
+            { dept: "Bouches-du-Rhône (13)", gares: 30, poi: 478, emoji: "🌅" },
+            { dept: "Var (83)", gares: 19, poi: 155, emoji: "⚓" },
+            { dept: "Alpes-Maritimes (06)", gares: 18, poi: 215, emoji: "🌊" },
+            { dept: "Vaucluse (84)", gares: 15, poi: 351, emoji: "🍇" },
+            { dept: "Alpes-de-Haute-Provence (04)", gares: 5, poi: 40, emoji: "🏔️" },
+            { dept: "Hautes-Alpes (05)", gares: 9, poi: 77, emoji: "🎿" },
           ].map((d) => (
             <div key={d.dept} className="dept-card">
               <span className="dept-emoji">{d.emoji}</span>

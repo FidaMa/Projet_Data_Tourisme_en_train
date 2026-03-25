@@ -1,138 +1,133 @@
-# 🚂 TrainPACA — Explorer la Provence en train
+# TrainPACA — Site Web React
 
-> Projet réalisé dans le cadre de l'**Open Data University Saison 4** — Fondation SNCF  
-> Thématique : *"Comment faciliter et encourager le tourisme en train en France ?"*
+Application web de tourisme ferroviaire en région PACA.
+Projet ADAD — Open Data University Saison 4 · Fondation SNCF
 
----
-
-## 🎯 Objectif
-
-TrainPACA est une application web interactive qui permet aux voyageurs de **découvrir la région PACA en train** en combinant :
-- Les **horaires SNCF en temps réel**
-- L'**empreinte carbone** des trajets (référentiel ADEME 2024)
-- Le **patrimoine culturel** des destinations (monuments DATAtourisme)
+**Équipe** : Fida Mars · Andrea Grasso · Asia Redaelli · Leila El Mabrouk
 
 ---
 
-## 🗂️ Structure du projet
-
-```
-train-paca/
-├── public/                  # Fichiers statiques
-├── src/
-│   ├── pages/
-│   │   ├── Home.jsx         # Page d'accueil
-│   │   ├── CartePACA.jsx    # Page cartes interactives
-│   │   └── Trajets.jsx      # Page recherche de trajets
-│   ├── components/
-│   │   ├── Navbar.jsx       # Barre de navigation
-│   │   ├── MapView.jsx      # Carte Leaflet interactive
-│   │   ├── SearchForm.jsx   # Formulaire de recherche
-│   │   ├── TripInfo.jsx     # Informations du trajet
-│   │   └── POIPanel.jsx     # Panneau points d'intérêt
-│   ├── data/
-│   │   ├── gares_paca.js    # 97 gares PACA (départs + arrivées)
-│   │   └── monuments_paca.js # 4 461 monuments DATAtourisme
-│   ├── utils/
-│   │   └── geo.js           # Calculs distance, CO₂, POI
-│   └── i18n/                # Traductions FR/EN
-├── index.html
-├── package.json
-└── vite.config.js
-```
+## Stack technique
+- **React 18 + Vite** — framework frontend + build optimisé
+- **Leaflet / React-Leaflet** — carte interactive OpenStreetMap
+- **React Router v6** — navigation entre les 3 pages
+- **API SNCF / Navitia** — horaires trains temps réel
+- **Basilic (data.gouv.fr)** — lieux culturels touristiques PACA
+- **ADEME Base Carbone 2024** — facteurs CO₂ officiels
 
 ---
 
-## 📄 Pages
-
-### 🏠 Page 1 — Accueil (`/`)
-- Présentation du projet TrainPACA
-- Statistiques clés : 30+ gares, ×126 moins de CO₂, 4 461 monuments, 6 départements
-- Comparatif empreinte carbone Train vs Voiture (ADEME 2024)
-- Sources de données utilisées
-
-### 🗺️ Page 2 — Cartes PACA (`/carte`)
-- Visualisation du réseau ferroviaire PACA
-- Cartes des monuments culturels
-- Statistiques par département
-- Viewer de cartes HTML interactives
-
-### 🚆 Page 3 — Trajets (`/trajets`)
-- **Point de départ** : 8 grandes villes PACA avec leurs gares
-  - Marseille (Saint-Charles + Blancarde)
-  - Aix-en-Provence (TGV + Centre)
-  - Nice, Toulon, Avignon Centre, Cannes, Antibes, Arles
-- **Point d'arrivée** : 88 villes / 96 gares organisées par département puis par ville
-  - Bouches-du-Rhône (13) — 26 villes
-  - Var (83) — 18 villes
-  - Alpes-Maritimes (06) — 16 villes
-  - Vaucluse (84) — 14 villes
-  - Alpes-de-Haute-Provence (04) — 5 villes
-  - Hautes-Alpes (05) — 9 villes
-- **Filtre durée** : Toutes / < 1h / < 2h / < 3h
-- **Horaires SNCF** en temps réel via API Navitia
-- **Empreinte carbone** Train vs Voiture (ADEME 2024)
-- **Monuments culturels** proches de la gare d'arrivée (DATAtourisme)
-- **Carte interactive** avec marqueurs gares + monuments
-
----
-
-## 🛠️ Stack technique
-
-| Technologie | Usage |
-|-------------|-------|
-| React 18 + Vite | Framework frontend |
-| React Router v6 | Navigation entre pages |
-| Leaflet + React-Leaflet | Carte interactive |
-| react-i18next | Internationalisation FR/EN |
-| API SNCF / Navitia | Horaires temps réel |
-| DATAtourisme | Base de données POI |
-
----
-
-## 📊 Sources de données
-
-| Source | Description |
-|--------|-------------|
-| **SNCF Open Data** | Dataset officiel des gares voyageurs (2 782 gares France) |
-| **API Navitia** | Horaires SNCF temps réel, calcul de trajets |
-| **DATAtourisme** | 21 347 POI région PACA (monuments, restaurants, hôtels) |
-| **ADEME Base Carbone 2024** | Facteurs d'émission CO₂ (train : 1,73g/km, voiture : 218g/km) |
-| **data.gouv.fr** | Lignes ferroviaires par région administrative |
-
----
-
-## ⚙️ Installation et lancement
-
+## Installation
 ```bash
-# Installer les dépendances
+cd train-paca
 npm install
-
-# Lancer en développement
 npm run dev
-# → http://localhost:5173/
-
-# Build pour production
-npm run build
 ```
 
 ---
 
-## 🌿 Impact environnemental
+## Pages
 
-Le train émet **126x moins de CO₂** que la voiture — ce ratio est constant car basé sur les facteurs fixes ADEME 2024 :
+### Page 1 — Accueil
+- Présentation du projet et objectifs
+- Stats clés : 88 villes · ×126 CO₂ · 3 255 lieux · 6 départements
+- Section "Comment ça marche"
+- Sources de données
+- Chiffres par département PACA
 
-| Transport | Facteur CO₂ (par km) |
-|-----------|---------------------|
-| 🚆 Train | 1,73 g/km |
-| 🚗 Voiture | 218 g/km |
+### Page 2 — Cartes PACA
+- Carte combinée : 935 lieux culturels Basilic + réseau de gares (Folium)
+- Carte réseau ferroviaire PACA avec lignes colorées (Folium)
+- Section "La région en chiffres" par département
 
-> Le site calcule dynamiquement la quantité exacte de CO₂ économisée pour chaque trajet selon sa distance réelle.
-
-*Source : Base Carbone ADEME 2024*
+### Page 3 — Trajets *(page principale)*
+- Sélection départ : 5 grandes villes / 7 gares
+- Sélection arrivée : 88 villes / 96 gares (organisées par département)
+- Filtre durée : Toutes / <1h / <2h / <3h
+- Horaires SNCF temps réel via API Navitia
+- Distance réelle ferroviaire depuis l'API
+- Empreinte CO₂ train vs voiture (ADEME 2024)
+- Lieux touristiques de la commune d'arrivée (Basilic)
+- Carte Leaflet interactive avec marqueurs
 
 ---
 
-## 👥 Équipe
+## Données
 
-Projet réalisé par **Fida Mars**, **Andrea Grasso**, **Asia Redaelli** et **Leila El Mabrouk** dans le cadre de l'Open Data University Saison 4 — Fondation SNCF.
+### Gares (`src/data/gares_paca.js`)
+- **7 gares de départ** (5 grandes villes) : Marseille, Aix-en-Provence, Nice, Toulon, Avignon
+- **96 gares d'arrivée** (88 villes) organisées par département PACA
+
+### Lieux touristiques (`src/data/monuments_paca.js`)
+- **3 255 lieux** issus de Basilic (Base des Lieux et Équipements Culturels)
+- Source : data.gouv.fr
+- Filtrage : types touristiques uniquement (monuments, musées, parcs, théâtres, cinémas)
+- Exclus : bibliothèques, librairies, archives, établissements d'enseignement
+- Champ `commune_lower` pour filtre par commune exacte de la gare d'arrivée
+
+### Cartes Folium (`public/cartes/`)
+- `paca_lieux_culturels_avec_gares.html` — 935 lieux Basilic + 135 gares
+- `carte_gares_lignes_couleurs_foncees.html` — réseau ferroviaire PACA
+
+---
+
+## Logique API SNCF
+
+```
+Endpoint : api.sncf.com/v1/coverage/sncf/journeys
+Auth     : Basic (clé API SNCF Open Data)
+
+Paramètres :
+  from     = stop_area:SNCF:{UIC_depart}
+  to       = stop_area:SNCF:{UIC_arrivee}
+  datetime = {date}T000000
+  count    = 15
+
+Boucle multi-appels (00h00 → 23h59, max 12 appels) :
+  → Filtre dep.startsWith(dateBase) : date exacte uniquement
+  → Déduplication via Set() sur heure de départ
+  → Avance : dernier départ + 1 minute
+
+Résultat : tous les trains de la journée
+  → Premier départ · Dernier départ · Nombre exact · Distance réelle
+```
+
+---
+
+## Calcul CO₂ (ADEME 2024)
+
+```
+Distance = depuis l'API SNCF (réelle) ou haversine (fallback GPS)
+
+CO₂ train   = distance × 1.73 g/km
+CO₂ voiture = distance × 218 g/km
+Ratio       = 126× moins en train
+```
+
+---
+
+## Pipeline Basilic
+
+```
+data.gouv.fr — Basilic brut (86 366 lignes France)
+    ↓ Notebook Python
+culture.csv — 5 226 lignes PACA filtrées
+    ↓ Script filtrage touristique
+monuments_paca.js — 3 255 lieux
+    ↓ Page 3 Trajets
+Filtre commune exacte → lieux de la ville d'arrivée
+```
+
+---
+
+## Modifications v2 (mars 2026)
+
+- ✅ Points de départ réduits à 5 villes (supprimé Cannes, Antibes, Arles)
+- ✅ Doublons gares arrivée supprimés
+- ✅ Dataset DATAtourisme remplacé par Basilic (data.gouv.fr)
+- ✅ Filtre monuments : commune exacte (au lieu du rayon 15km)
+- ✅ Page 2 : 2 cartes Folium intégrées
+- ✅ API SNCF : boucle multi-appels pour tous les trains de la journée
+- ✅ Distance réelle depuis l'API (au lieu de haversine uniquement)
+- ✅ Chiffres corrigés (×126 CO₂, 3 255 lieux, 88 villes)
+- ✅ Filtres monuments : Monuments / Musées / Parcs / Théâtres / Cinémas

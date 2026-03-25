@@ -25,7 +25,7 @@ export default function Home() {
           </div>
           <div className="hero-tags">
             <span>SNCF Open Data</span>
-            <span>DATAtourisme</span>
+            <span>Basilic</span>
             <span>OpenStreetMap</span>
             <span>React + Leaflet</span>
           </div>
@@ -39,18 +39,18 @@ export default function Home() {
       {/* STATS */}
       <section className="stats-band">
         <div className="stat-item">
-          <span className="stat-num">30+</span>
-          <span className="stat-label">Gares en PACA</span>
+          <span className="stat-num">88</span>
+          <span className="stat-label">Villes d'arrivée</span>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <span className="stat-num">×20</span>
+          <span className="stat-num">×126</span>
           <span className="stat-label">Moins de CO₂ qu'en voiture</span>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <span className="stat-num">21k</span>
-          <span className="stat-label">Points d'intérêt touristiques</span>
+          <span className="stat-num">3 255</span>
+          <span className="stat-label">Lieux touristiques près des gares</span>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
@@ -125,9 +125,9 @@ export default function Home() {
             <h3>Points d'intérêt</h3>
             <p>
               Monuments historiques, musées, hôtels et restaurants géolocalisés
-              autour de chaque gare d'arrivée, issus de DATAtourisme (open data national).
+              autour de chaque gare d'arrivée, issus de Basilic (Base des Lieux et Équipements Culturels, data.gouv.fr).
             </p>
-            <span className="contenu-link">Source : DATAtourisme</span>
+            <span className="contenu-link">Source : Basilic · data.gouv.fr</span>
           </div>
         </div>
       </section>
@@ -138,7 +138,7 @@ export default function Home() {
         <div className="donnees-grid">
           {[
             { icon: "🚉", titre: "API SNCF / Navitia", desc: "Horaires, gares, trajets en temps réel", lien: "api.sncf.com" },
-            { icon: "🏛️", titre: "DATAtourisme", desc: "21 347 POI touristiques en PACA", lien: "datatourisme.fr" },
+            { icon: "🏛️", titre: "Basilic", desc: "3 255 lieux touristiques PACA (data.gouv.fr)", lien: "data.gouv.fr" },
             { icon: "🗺️", titre: "OpenStreetMap", desc: "Fond de carte et tracés ferroviaires", lien: "openstreetmap.org" },
             { icon: "📊", titre: "data.gouv.fr", desc: "Défi Open Data University SNCF", lien: "defis.data.gouv.fr" },
           ].map((d) => (
