@@ -5,7 +5,7 @@ const CARTES = [
   {
     id: "culture_gares",
     titre: "Lieux culturels & gares PACA",
-    description: "Carte combinée : 935 lieux culturels Basilic (monuments, musées, théâtres, cinémas) et le réseau de gares ferroviaires PACA — filtrés par communes desservies par le réseau SNCF.",
+    description: "Carte combinée : 935 lieux culturels Basilic et le réseau de gares ferroviaires PACA — filtrés par communes desservies par le réseau SNCF.",
     icon: "🏛️",
     fichier: "/cartes/paca_lieux_culturels_avec_gares.html",
     source: "Basilic · data.gouv.fr",
