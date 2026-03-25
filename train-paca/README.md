@@ -117,17 +117,3 @@ monuments_paca.js — 3 255 lieux
     ↓ Page 3 Trajets
 Filtre commune exacte → lieux de la ville d'arrivée
 ```
-
----
-
-## Modifications v2 (mars 2026)
-
-- ✅ Points de départ réduits à 5 villes (supprimé Cannes, Antibes, Arles)
-- ✅ Doublons gares arrivée supprimés
-- ✅ Dataset DATAtourisme remplacé par Basilic (data.gouv.fr)
-- ✅ Filtre monuments : commune exacte (au lieu du rayon 15km)
-- ✅ Page 2 : 2 cartes Folium intégrées
-- ✅ API SNCF : boucle multi-appels pour tous les trains de la journée
-- ✅ Distance réelle depuis l'API (au lieu de haversine uniquement)
-- ✅ Chiffres corrigés (×126 CO₂, 3 255 lieux, 88 villes)
-- ✅ Filtres monuments : Monuments / Musées / Parcs / Théâtres / Cinémas
