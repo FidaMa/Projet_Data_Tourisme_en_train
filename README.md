@@ -21,15 +21,13 @@ Projet_Data_Tourisme_en_train/
 │
 ├── 📓 NOTEBOOKS (Version Finale)
 │   ├── NOTEBOOK_PROJET_FINAL_.ipynb      ← Notebook principal (Basilic + cartes)
-│   ├── gares_with_lines (2).ipynb        ← Carte réseau ferroviaire PACA
+│   ├── gares_with_lines_vf.ipynb        ← Carte réseau ferroviaire PACA
 │   └── 5k_monuments_analysis.ipynb       # Analyse exploratoire monuments
 │
 ├── 🗺️ CARTES HTML INTERACTIVES (Version Finale)
 │   ├── paca_lieux_culturels_avec_gares_vf.html  ← Carte finale : 935 lieux Basilic + gares
 │   ├── paca_monuments_vf.html                   ← Carte finale : monuments PACA (Basilic)
-│   ├── carte_gares_lignes_couleurs_foncees.html ← Carte réseau ferroviaire PACA
-│   ├── paca_monuments_avec_gares.html    # Version précédente (DATAtourisme)
-│   └── paca_monuments.html               # Version précédente
+│   ├── carte_gares_lignes_couleurs_foncees_vf.html ← Carte réseau ferroviaire PACA
 │
 ├── 📁 DATASETS
 │   ├── gares-de-voyageurs (1).csv        # 2 782 gares voyageurs France (SNCF)
@@ -52,7 +50,7 @@ Projet_Data_Tourisme_en_train/
 | Fichier | Description |
 |---------|-------------|
 | `NOTEBOOK_PROJET_FINAL_.ipynb` | **Notebook principal version finale** — Chargement et filtrage de la base Basilic (data.gouv.fr), génération des cartes Folium interactives (lieux culturels + gares PACA), analyse par commune et département |
-| `gares_with_lines (2).ipynb` | **Carte réseau ferroviaire version finale** — Visualisation des gares et lignes SNCF PACA avec couleurs par ligne |
+| `gares_with_lines_vf.ipynb` | **Carte réseau ferroviaire version finale** — Visualisation des gares et lignes SNCF PACA avec couleurs par ligne |
 | `5k_monuments_analysis.ipynb` | Analyse exploratoire des monuments DATAtourisme PACA (version précédente) |
 
 ### Pipeline de données Basilic
@@ -76,7 +74,7 @@ paca_lieux_culturels_avec_gares_vf.html
 |---------|-------------|---------|
 | `paca_lieux_culturels_avec_gares_vf.html` | **Carte finale combinée** — 935 lieux culturels Basilic + 135 gares PACA | Basilic · SNCF |
 | `paca_monuments_vf.html` | **Carte finale monuments** — tous les lieux culturels Basilic PACA filtrés | Basilic · data.gouv.fr |
-| `carte_gares_lignes_couleurs_foncees.html` | **Carte réseau ferroviaire** — gares et lignes SNCF PACA avec couleurs | SNCF Open Data |
+| `carte_gares_lignes_couleurs_foncees_vf.html` | **Carte réseau ferroviaire** — gares et lignes SNCF PACA avec couleurs | SNCF Open Data |
 
 ---
 
